@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservationService } from '../reservation/reservation.service';
 import { Reservation } from '../models/reservation';
 import { Router, ActivatedRoute } from '@angular/router';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-reservation-form',
@@ -30,10 +31,11 @@ export class ReservationFormComponent {
     let id = this.activatedRoute.snapshot.paramMap.get('id');
 
     if(id){
-      let reservation = this.reservationService.getReservatoion(id);
-      if(reservation){
-        this.reservationForm.patchValue(reservation)
-      }
+      this.reservationService.getReservatoion(id).subscribe(reservation => {
+        if(reservation){
+          this.reservationForm.patchValue(reservation)
+        }
+      });
     }
   }
 
@@ -49,9 +51,13 @@ export class ReservationFormComponent {
 
       if(id){
         reservation.id = id;
-        this.reservationService.updateReservation(id, reservation);
+        this.reservationService.updateReservation(id, reservation).subscribe(() => {
+          console.log("Update request processed")
+        })
       }else{
-        this.reservationService.addReservation(reservation);
+        this.reservationService.addReservation(reservation).subscribe(() =>{
+          console.log("Create request processed")
+        })
       }
       this.router.navigate(['/list'])
     }

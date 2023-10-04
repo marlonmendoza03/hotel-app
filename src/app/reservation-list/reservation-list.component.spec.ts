@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReversationListComponent } from './reservation-list.component';
+import { ReservationListComponent } from './reservation-list.component';
 
 describe('ReversationListComponent', () => {
-  let component: ReversationListComponent;
-  let fixture: ComponentFixture<ReversationListComponent>;
+  let component: ReservationListComponent;
+  let fixture: ComponentFixture<ReservationListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ReversationListComponent]
+      declarations: [ReservationListComponent]
     });
-    fixture = TestBed.createComponent(ReversationListComponent);
+    fixture = TestBed.createComponent(ReservationListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
